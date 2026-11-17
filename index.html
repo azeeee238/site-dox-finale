@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>OSINT // QG PRINCIPAL</title>
+    <style>
+        body {
+            background-color: #050a05;
+            color: #33ff33;
+            font-family: 'Courier New', Courier, monospace;
+            padding: 40px;
+        }
+        h1 {
+            border-bottom: 3px solid #33ff33;
+            padding-bottom: 15px;
+            font-size: 24px;
+            text-shadow: 0 0 12px rgba(51, 255, 51, 0.6);
+        }
+        p {
+            font-size: 16px;
+            margin-bottom: 30px;
+        }
+        .menu {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 30px; /* Grosses marges bien larges entre les blocs */
+        }
+        .btn {
+            border: 3px dashed;
+            padding: 45px 20px; /* Les gros blocs massifs du tout début */
+            text-decoration: none;
+            text-align: center;
+            font-weight: bold;
+            font-size: 20px; /* Texte bien gros et lisible */
+            transition: 0.3s;
+            display: block;
+        }
+        
+        /* 1 à 4 : Verts multicolores d'origine */
+        .btn-g1 { border-color: #00ff66; background: rgba(0, 40, 20, 0.7); color: #00ff66; box-shadow: 0 0 15px rgba(0, 255, 102, 0.3); }
+        .btn-g2 { border-color: #33ff33; background: rgba(10, 45, 10, 0.7); color: #33ff33; box-shadow: 0 0 15px rgba(51, 255, 51, 0.3); }
+        .btn-g3 { border-color: #66ff00; background: rgba(20, 45, 0, 0.7); color: #66ff00; box-shadow: 0 0 15px rgba(102, 255, 0, 0.3); }
+        .btn-g4 { border-color: #22ff88; background: rgba(0, 45, 25, 0.7); color: #22ff88; box-shadow: 0 0 15px rgba(34, 255, 136, 0.3); }
+        .btn-g1:hover, .btn-g2:hover, .btn-g3:hover, .btn-g4:hover {
+            background: rgba(51, 255, 51, 0.4);
+            color: #fff;
+            box-shadow: 0 0 35px rgba(51, 255, 51, 0.8);
+        }
+
+        /* 5 à 8 : Rouges massifs */
+        .btn-r5 { border-color: #ff2222; background: rgba(40, 0, 0, 0.7); color: #ff4444; box-shadow: 0 0 15px rgba(255, 34, 34, 0.3); }
+        .btn-r6 { border-color: #ff4444; background: rgba(45, 5, 5, 0.7); color: #ff6666; box-shadow: 0 0 15px rgba(255, 68, 68, 0.3); }
+        .btn-r7 { border-color: #ff1155; background: rgba(40, 0, 15, 0.7); color: #ff5588; box-shadow: 0 0 15px rgba(255, 17, 85, 0.3); }
+        .btn-r8 { border-color: #cc0000; background: rgba(35, 0, 0, 0.7); color: #ff3333; box-shadow: 0 0 15px rgba(204, 0, 0, 0.3); }
+        .btn-r5:hover, .btn-r6:hover, .btn-r7:hover, .btn-r8:hover {
+            background: rgba(255, 51, 51, 0.4);
+            color: #fff;
+            box-shadow: 0 0 35px rgba(255, 0, 0, 0.8);
+        }
+
+        /* 9 à 12 : Violets massifs */
+        .btn-p9  { border-color: #9900ff; background: rgba(25, 0, 40, 0.7); color: #bb66ff; box-shadow: 0 0 15px rgba(153, 0, 255, 0.3); }
+        .btn-p10 { border-color: #b033ff; background: rgba(30, 0, 45, 0.7); color: #cc88ff; box-shadow: 0 0 15px rgba(176, 51, 255, 0.3); }
+        .btn-p11 { border-color: #d11aff; background: rgba(35, 0, 50, 0.7); color: #e066ff; box-shadow: 0 0 15px rgba(209, 26, 255, 0.3); }
+        .btn-p12 { border-color: #8800cc; background: rgba(20, 0, 35, 0.7); color: #aa44ff; box-shadow: 0 0 15px rgba(136, 0, 204, 0.3); }
+        .btn-p9:hover, .btn-p10:hover, .btn-p11:hover, .btn-p12:hover {
+            background: rgba(176, 51, 255, 0.4);
+            color: #fff;
+            box-shadow: 0 0 35px rgba(176, 51, 255, 0.8);
+        }
+
+        /* 13 à 16 : Blancs massifs */
+        .btn-w13 { border-color: #dddddd; background: rgba(30, 30, 30, 0.7); color: #eeeeee; box-shadow: 0 0 15px rgba(221, 221, 221, 0.3); }
+        .btn-w14 { border-color: #ffffff; background: rgba(40, 40, 40, 0.7); color: #ffffff; box-shadow: 0 0 15px rgba(255, 255, 255, 0.3); }
+        .btn-w15 { border-color: #cccccc; background: rgba(25, 25, 25, 0.7); color: #dddddd; box-shadow: 0 0 15px rgba(204, 204, 204, 0.3); }
+        .btn-w16 { border-color: #f0f0f0; background: rgba(35, 35, 35, 0.7); color: #ffffff; box-shadow: 0 0 15px rgba(240, 240, 240, 0.3); }
+        .btn-w13:hover, .btn-w14:hover, .btn-w15:hover, .btn-w16:hover {
+            background: rgba(255, 255, 255, 0.4);
+            color: #000;
+            box-shadow: 0 0 35px rgba(255, 255, 255, 0.8);
+        }
+    </style>
+</head>
+<body>
+    <h1>// QG OSINT - TERMINAL PRINCIPAL (16 SECTIONS)</h1>
+    <p>Sélectionne un secteur d'analyse :</p>
+    
+    <div class="menu">
+        <!-- 1 à 4 : Verts -->
+        <a href="section1.html" class="btn btn-g1">[ SECTION 01 ]</a>
+        <a href="section2.html" class="btn btn-g2">[ SECTION 02 ]</a>
+        <a href="section3.html" class="btn btn-g3">[ SECTION 03 ]</a>
+        <a href="section4.html" class="btn btn-g4">[ SECTION 04 ]</a>
+        
+        <!-- 5 à 8 : Rouges -->
+        <a href="section5.html" class="btn btn-r5">[ SECTION 05 ]</a>
+        <a href="section6.html" class="btn btn-r6">[ SECTION 06 ]</a>
+        <a href="section7.html" class="btn btn-r7">[ SECTION 07 ]</a>
+        <a href="section8.html" class="btn btn-r8">[ SECTION 08 ]</a>
+        
+        <!-- 9 à 12 : Violets -->
+        <a href="section9.html" class="btn btn-p9">[ SECTION 09 ]</a>
+        <a href="section10.html" class="btn btn-p10">[ SECTION 10 ]</a>
+        <a href="section11.html" class="btn btn-p11">[ SECTION 11 ]</a>
+        <a href="section12.html" class="btn btn-p12">[ SECTION 12 ]</a>
+        
+        <!-- 13 à 16 : Blancs -->
+        <a href="section13.html" class="btn btn-w13">[ SECTION 13 ]</a>
+        <a href="section14.html" class="btn btn-w14">[ SECTION 14 ]</a>
+        <a href="section15.html" class="btn btn-w15">[ SECTION 15 ]</a>
+        <a href="section16.html" class="btn btn-w16">[ SECTION 16 ]</a>
+    </div>
+</body>
+</html>

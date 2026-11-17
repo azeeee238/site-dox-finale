@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Module 02 // Sources Clés</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap');
+        body { font-family: 'Share Tech Mono', monospace; background-color: #030712; color: #00ff66; }
+        .cyber-glow { text-shadow: 0 0 10px rgba(0, 255, 102, 0.5); }
+        .cyber-box { border: 1px solid #00ff66; box-shadow: 0 0 15px rgba(0, 255, 102, 0.15); background: rgba(3, 7, 18, 0.9); }
+    </style>
+</head>
+<body class="min-h-screen p-6">
+    <div class="max-w-4xl mx-auto">
+        <header class="cyber-box p-6 mb-8">
+            <h1 class="text-2xl font-bold cyber-glow">⚡ MODULE 02 // Les Sources Clés & Dorking</h1>
+            <p class="text-emerald-400 mt-2 text-sm">> Fichier source : search_vectors.log</p>
+        </header>
+        <main class="cyber-box p-6 space-y-4 text-gray-300 text-sm leading-relaxed">
+            <h2 class="text-xl font-bold text-emerald-300">Techniques de recherche avancée</h2>
+            <p>Le *Google Dorking* consiste à utiliser des opérateurs spéciaux pour cibler des fichiers ou des pages précises :</p>
+            <ul class="space-y-2 pl-4">
+                <li>> <code class="text-emerald-400">site:github.com "mot-clé"</code> : Recherche cible sur un site précis.</li>
+                <li>> <code class="text-emerald-400">filetype:pdf "rapport"</code> : Cible uniquement des documents PDF.</li>
+                <li>> <code class="text-emerald-400">intitle:"index of"</code> : Permet de trouver des répertoires de fichiers ouverts.</li>
+            </ul>
+            <div class="pt-6">
+                <a href="index.html" class="inline-block border border-emerald-500 px-4 py-2 text-emerald-400 hover:bg-emerald-500 hover:text-black transition-colors">
+                    < Retour au menu principal
+                </a>
+            </div>
+        </main>
+    </div>
+</body>
+</html>

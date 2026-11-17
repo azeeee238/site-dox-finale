@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>MULTI-SEARCH // SECTION 14</title>
+    <style>
+        :root {
+            --bg-color: #08090c;
+            --panel-bg: #12151c;
+            --border-color: #1f293d;
+            --accent-neon: #00f3ff;
+            --accent-glow: rgba(0, 243, 255, 0.25);
+            --text-main: #e2e8f0;
+            --text-muted: #64748b;
+        }
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            margin: 0;
+            padding: 40px 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .container {
+            width: 100%;
+            max-width: 850px;
+        }
+        h1 {
+            font-size: 1.5rem;
+            color: #ffffff;
+            margin-bottom: 25px;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 12px;
+            letter-spacing: 1px;
+            text-shadow: 0 0 10px rgba(0, 243, 255, 0.3);
+        }
+        .search-box {
+            background: var(--panel-bg);
+            padding: 25px;
+            border-radius: 10px;
+            border: 1px solid var(--border-color);
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.7), 0 0 15px rgba(0, 243, 255, 0.05);
+        }
+        .input-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-bottom: 15px;
+        }
+        input {
+            background: #05070a;
+            color: var(--accent-neon);
+            padding: 12px 15px;
+            font-size: 15px;
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            outline: none;
+            transition: all 0.3s ease;
+        }
+        input::placeholder {
+            color: var(--text-muted);
+        }
+        input:focus {
+            border-color: var(--accent-neon);
+            box-shadow: 0 0 10px var(--accent-glow);
+            background: #0a0d14;
+        }
+        button {
+            background: linear-gradient(135deg, #0077ff, #00f3ff);
+            color: #05070a;
+            border: none;
+            padding: 14px;
+            font-size: 16px;
+            font-weight: bold;
+            border-radius: 6px;
+            cursor: pointer;
+            width: 100%;
+            transition: all 0.3s ease;
+            box-shadow: 0 0 15px rgba(0, 243, 255, 0.3);
+            letter-spacing: 0.5px;
+        }
+        button:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 0 25px rgba(0, 243, 255, 0.6);
+            background: linear-gradient(135deg, #0088ff, #33f6ff);
+        }
+        #results {
+            margin-top: 25px;
+        }
+        .result-card {
+            background: var(--panel-bg);
+            border: 1px solid var(--border-color);
+            padding: 20px;
+            margin-top: 15px;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.4);
+            border-left: 4px solid var(--accent-neon);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+        .result-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0, 243, 255, 0.15);
+        }
+        .result-card strong {
+            color: var(--accent-neon);
+            font-size: 1.1rem;
+            display: inline-block;
+            margin-bottom: 8px;
+        }
+        .result-line {
+            margin: 4px 0;
+            color: var(--text-main);
+            font-size: 14px;
+        }
+        .result-line span {
+            color: var(--text-muted);
+        }
+        .back-link {
+            display: inline-block;
+            margin-top: 30px;
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 14px;
+            transition: color 0.2s;
+        }
+        .back-link:hover {
+            color: var(--accent-neon);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>⚡ MULTI-SEARCH CONSOLE // SECTION 14</h1>
+        
+        <div class="search-box">
+            <div class="input-row">
+                <input type="text" id="inputNom" placeholder="Nom...">
+                <input type="text" id="inputPrenom" placeholder="Prénom...">
+            </div>
+            <div class="input-row">
+                <input type="text" id="inputAdresse" placeholder="Adresse..." style="grid-column: span 2;">
+            </div>
+            <div class="input-row">
+                <input type="text" id="inputVille" placeholder="Ville...">
+                <input type="text" id="inputCp" placeholder="Code Postal...">
+            </div>
+            <button onclick="lancerRecherche()">LANCER LA RECHERCHE</button>
+        </div>
+
+        <div id="results">
+            <p style="color: var(--text-muted); font-style: italic; padding: 5px;">En attente de critères...</p>
+        </div>
+
+        <a href="index.html" class="back-link">&larr; Retour au QG principal</a>
+    </div>
+
+    <script>
+        async function lancerRecherche() {
+            const qNom = document.getElementById("inputNom").value.trim().toLowerCase();
+            const qPrenom = document.getElementById("inputPrenom").value.trim().toLowerCase();
+            const qAdresse = document.getElementById("inputAdresse").value.trim().toLowerCase();
+            const qVille = document.getElementById("inputVille").value.trim().toLowerCase();
+            const qCp = document.getElementById("inputCp").value.trim().toLowerCase();
+            
+            const resultsContainer = document.getElementById("results");
+
+            if (!qNom && !qPrenom && !qAdresse && !qVille && !qCp) {
+                resultsContainer.innerHTML = `<p style="color: #ff3366; padding: 5px;">[!] Remplis au moins un champ pour lancer l'analyse.</p>`;
+                return;
+            }
+
+            resultsContainer.innerHTML = `<p style="color: var(--accent-neon); padding: 5px;">Analyse en cours...</p>`;
+
+            try {
+                const response = await fetch('data.json');
+                const data = await response.json();
+
+                let matches = [];
+                for (let key in data) {
+                    let item = data[key];
+                    let nom = (item.nom || key).toLowerCase();
+                    let prenom = (item.prenom || "").toLowerCase();
+                    let adresse = (item.adresse || "").toLowerCase();
+                    let ville = (item.ville || "").toLowerCase();
+                    let cp = (item.cp || item.code_postal || "").toLowerCase();
+
+                    if ((!qNom || nom.includes(qNom)) &&
+                        (!qPrenom || prenom.includes(qPrenom)) &&
+                        (!qAdresse || adresse.includes(qAdresse)) &&
+                        (!qVille || ville.includes(qVille)) &&
+                        (!qCp || cp.includes(qCp))) {
+                        matches.push({ key: key, details: item });
+                    }
+                }
+
+                if (matches.length > 0) {
+                    let html = "";
+                    matches.forEach(m => {
+                        let d = m.details;
+                        html += `
+                            <div class="result-card">
+                                <strong>Cible : ${m.key}</strong><br>
+                                <div class="result-line"><span>Nom :</span> ${d.nom || 'N/A'}</div>
+                                <div class="result-line"><span>Prénom :</span> ${d.prenom || 'N/A'}</div>
+                                <div class="result-line"><span>Adresse :</span> ${d.adresse || 'N/A'}</div>
+                                <div class="result-line"><span>Ville :</span> ${d.ville || 'N/A'}</div>
+                                <div class="result-line"><span>Code Postal :</span> ${d.cp || d.code_postal || 'N/A'}</div>
+                            </div>
+                        `;
+                    });
+                    resultsContainer.innerHTML = html;
+                } else {
+                    resultsContainer.innerHTML = `<p style="color: #ff3366; padding: 5px;">[x] Aucun résultat trouvé pour ces critères.</p>`;
+                }
+            } catch (err) {
+                resultsContainer.innerHTML = `<p style="color: #ff3366; padding: 5px;">[ERREUR] Impossible de charger le fichier data.json.</p>`;
+            }
+        }
+    </script>
+</body>
+</html>
